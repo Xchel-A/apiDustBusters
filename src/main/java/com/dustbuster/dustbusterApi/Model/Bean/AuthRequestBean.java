@@ -2,6 +2,7 @@ package com.dustbuster.dustbusterApi.Model.Bean;
 
 import com.dustbuster.dustbusterApi.Entity.Rol;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;

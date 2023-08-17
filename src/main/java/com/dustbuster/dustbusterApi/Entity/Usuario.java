@@ -1,6 +1,8 @@
 package com.dustbuster.dustbusterApi.Entity;
 
 import jakarta.persistence.*;
+
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -48,6 +50,8 @@ public class Usuario {
     @Column(nullable = false)
     @NotEmpty
     private String password;
+
+    @Column(columnDefinition = "BIT(1)")
     private Boolean enabled;
 
     @Size(max = 200)
