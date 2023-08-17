@@ -30,6 +30,9 @@ public class Servicio {
     @Column(name = "descripcion_servicio", columnDefinition = "TEXT")
     private String descripcionServicio;
 
+    @Column(name = "urlImagen_servicio", columnDefinition = "TEXT")
+    private String urlImagenServicio;
+
     @Column(name = "tamano_inmueble", length = 50)
     private String tamanoInmueble;
 
@@ -51,8 +54,14 @@ public class Servicio {
     @Column(name = "hora_fin")
     private Time horaFin;
 
+    @Column(name = "latitud")
     private String latitud;
+
+    @Column(name = "longitud")
     private String longitud;
+
+    @Column(name = "direccion")
+    private String direccion;
 
     /**
      * , 'pendiente' = 0, 'en_progreso'=1, 'completado'=2)"

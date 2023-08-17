@@ -17,9 +17,11 @@ public class ServicioController {
 
     // Endpoint para obtener todos los servicios
     @GetMapping
-    public List<Servicio> obtenerTodosServicios() {
-        return servicioRepository.findAll();
+    public List<Servicio> obtenerServiciosEstado0() {
+        List<Servicio> servicios = servicioRepository.findByEstado(0);
+        return servicios;
     }
+
 
     // Endpoint para obtener un servicio por su ID
     @GetMapping("/{id}")
@@ -56,6 +58,10 @@ public class ServicioController {
         servicioExistente.setHoraInicio(servicioActualizado.getHoraInicio());
         servicioExistente.setHoraFin(servicioActualizado.getHoraFin());
         servicioExistente.setEstado(servicioActualizado.getEstado());
+        servicioExistente.setUrlImagenServicio(servicioActualizado.getUrlImagenServicio());
+        servicioExistente.setDireccion(servicioActualizado.getDireccion());
+        servicioExistente.setLatitud(servicioActualizado.getLatitud());
+        servicioExistente.setLongitud(servicioActualizado.getLongitud());
 
         servicioRepository.save(servicioExistente);
         return ResponseEntity.ok(servicioExistente);
@@ -72,12 +78,22 @@ public class ServicioController {
         return ResponseEntity.noContent().build();
     }
     @GetMapping("byidcliente/{id}")
-    public ResponseEntity<List<Servicio>> obtenerServicioPorIdCliente(@PathVariable Long id) {
-        List<Servicio> servicios = servicioRepository.findByClienteId(id);
+    public ResponseEntity<List<Servicio>> obtenerServiciosPorIdClienteEstado0(@PathVariable Long id) {
+        List<Servicio> servicios = servicioRepository.findByClienteIdAndEstado0(id);
         if (servicios.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(servicios);
+    }
+
+    // Endpoint para obtener el historial de servicios (estado 1 o 2)
+    @GetMapping("/historial/{id}")
+    public ResponseEntity<List<Servicio>> obtenerHistorialServicios(@PathVariable Long id) {
+        List<Servicio> historialServicios = servicioRepository.findHistorialByClienteId(id);
+        if (historialServicios.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(historialServicios);
     }
 
     @GetMapping("byidlimpiador/{id}")
